@@ -1,0 +1,20 @@
+{
+  "name": "trusttrace-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "description": "React researcher dashboard, k-anonymized-aggregate-only per spec 2.11.",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "@vitejs/plugin-react": "^4.0.0"
+  }
+}

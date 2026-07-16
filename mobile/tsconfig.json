@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "noEmit": true,
+    "jsx": "react",
+    "esModuleInterop": true,
+    "target": "es2020",
+    "module": "es2020",
+    "moduleResolution": "bundler",
+    "skipLibCheck": true,
+    "allowJs": false,
+    "types": [
+      "react"
+    ]
+  },
+  "include": [
+    "App.tsx",
+    "index.js",
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
+  "exclude": [
+    "**/*.test.ts",
+    "src/native-modules",
+    "**/__tests__/**",
+    "node_modules"
+  ],
+  "extends": "expo/tsconfig.base"
+}

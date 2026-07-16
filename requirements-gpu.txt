@@ -1,0 +1,25 @@
+# TrustTrace — REAL MODEL extras for Linux + GPU boxes (OPTIONAL).
+# The core requirements.txt runs the full tested system on the fallback path.
+# Install these (per docs/REAL_MODELS_SETUP.md) to activate real models.
+# Each is guarded in code: if absent, the tested fallback is used.
+# Some need special install flags — SEE THE SETUP GUIDE, don't bulk-install.
+
+# Real Llama 3.2 cascade — install with CUDA flags (setup guide §1):
+#   CMAKE_ARGS="-DGGML_CUDA=on" pip install llama-cpp-python
+llama-cpp-python>=0.2.90
+
+# Real FAISS ANN (§2) — use faiss-gpu on CUDA, faiss-cpu otherwise.
+faiss-cpu>=1.8.0
+
+# Real GraphSAGE (§3) — install torch from the pytorch CUDA index first.
+torch>=2.2
+torch-geometric>=2.5
+
+# Real NLI cross-encoder (§4).
+transformers>=4.40
+
+# Real SQLCipher (§5) — needs system libsqlcipher-dev first.
+pysqlcipher3>=1.2.0
+
+# Model weight download helper.
+huggingface_hub>=0.23

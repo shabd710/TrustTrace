@@ -1,0 +1,59 @@
+{
+  "expo": {
+    "name": "TrustTrace",
+    "slug": "trusttrace",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "_userInterfaceStyle_note": "The palette is deliberately light-only for v1 (all screens hardcode a light theme); declaring it here keeps the OS from rendering system surfaces dark against light content. A dark palette is a post-1.0 item.",
+    "backgroundColor": "#FFFFFF",
+    "splash": {
+      "backgroundColor": "#0369A1",
+      "resizeMode": "contain"
+    },
+    "android": {
+      "package": "com.trusttrace.app",
+      "versionCode": 1,
+      "splash": {
+        "backgroundColor": "#0369A1",
+        "resizeMode": "contain"
+      },
+      "_permissionsNote": "Only permissions backed by a shipped implementation are declared. INTERNET is added automatically by RN for the opt-in cloud/backend calls. RECEIVE_SMS/BIND_ACCESSIBILITY_SERVICE/SYSTEM_ALERT_WINDOW were removed until their native services exist (Play Store rejects unbacked sensitive permissions). The GGUF model uses the app-private files dir, which needs no storage permission.",
+      "permissions": [],
+      "blockedPermissions": [
+        "android.permission.RECEIVE_SMS",
+        "android.permission.BIND_ACCESSIBILITY_SERVICE",
+        "android.permission.SYSTEM_ALERT_WINDOW",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.VIBRATE"
+      ]
+    },
+    "_splash_note": "Expo prebuild generates android/.../values/colors.xml with splashscreen_background from the splash.backgroundColor above. Without a splash block, prebuild can emit a splashscreen.xml referencing @color/splashscreen_background while leaving that color undefined -- the exact mismatch reported. Defining it here makes the generated resources internally consistent.",
+    "ios": {
+      "bundleIdentifier": "com.trusttrace.app",
+      "buildNumber": "1",
+      "_model_provisioning_note": "UIFileSharingEnabled + LSSupportsOpeningDocumentsInPlace are the iOS equivalent of the Android adb-push flow: they let the GGUF be dropped into the app's Documents folder via Finder/Files, where modelProvisioning.ts's documentDirectory resolver (path 2, no native module needed -- the expo read gate is Android-only) finds it as Documents/models/<name>.gguf.",
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "Used only if you turn on live-call transcription to check for scam patterns during a call. Off by default.",
+        "NSCameraUsageDescription": "Not used by TrustTrace.",
+        "UIFileSharingEnabled": true,
+        "LSSupportsOpeningDocumentsInPlace": true
+      }
+    },
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "allowBackup": false
+          }
+        }
+      ]
+    ],
+    "extra": {
+      "_apiUrlNote": "Base URL of the TrustTrace FastAPI backend. Read by mobile/src/config/env.ts. Overridden by EXPO_PUBLIC_TRUSTTRACE_API_URL if set. For a USB-attached physical device, run `adb reverse tcp:8000 tcp:8000` and keep localhost:8000 here -- the API then rides the same USB tunnel Metro uses, so it survives Wi-Fi/firewall issues. Over Wi-Fi instead, put your machine's LAN IP here, e.g. http://192.168.1.20:8000",
+      "trusttraceApiUrl": "http://localhost:8000"
+    }
+  }
+}

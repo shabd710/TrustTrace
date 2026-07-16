@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TrustTrace — Researcher Dashboard</title>
+    <!--
+      Spec ref: PDF Section 2.11 — researcher dashboard, k-anonymized
+      aggregate only. This is the Vite SPA entry (the package.json's
+      `vite` start script's document root). It mounts the client-rendered
+      React app; there is no server-rendering in the shipped architecture
+      (App.js was only ever server-rendered ONCE as a build-time smoke
+      test, which is a verification technique, not the runtime design).
+    -->
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

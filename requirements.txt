@@ -1,0 +1,35 @@
+# TrustTrace backend + detection/grounding/threat-intel/federated Python deps.
+#
+# Two groups, split honestly:
+#
+# ALREADY VERIFIED in the sandbox this repo was built in (no network access
+# there -- these happened to be pre-installed, and every module using them
+# was actually executed and tested):
+networkx>=3.6
+numpy>=2.0
+scipy>=1.13
+scikit-learn>=1.5
+
+# NOT AVAILABLE in that sandbox (no network access to pip install) --
+# backend/, and the FastAPI-dependent parts of this repo, are written
+# against these APIs correctly but were not execution-verified there.
+# Install these and re-run `pytest tests/` in an environment with network
+# access to actually exercise backend/main.py end to end.
+fastapi>=0.111
+pydantic>=2.7
+uvicorn[standard]>=0.30
+# uvloop>=0.19          # spec Target Environment: uvloop event loop
+asyncpg>=0.29          # spec Target Environment: non-blocking Postgres
+redis>=5.0              # spec 9.4: Redis pub/sub for aggregation-worker state
+msgpack>=1.0            # spec 9.4: MsgPack instead of JSON for sync payloads
+pytest>=8.0
+pytest-asyncio>=0.23
+appium-python-client>=4.0   # eval/device_farm/appium_harness.py + synthetic_injection.py
+
+# Named in the spec but NOT wired into working code in this build (real
+# production swap-ins for the honest stand-ins documented throughout --
+# see TrustTrace_Application_Guide.md's "REAL vs SIM" summary table):
+#   torch + torch-geometric   -- real learned GraphSAGE weights (threat-intel/campaign_predictor.py currently uses an un-learned, hand-rolled inductive aggregator)
+#   faiss-cpu or faiss-gpu    -- real sub-linear ANN search (currently a brute-force numpy stand-in)
+#   llama-cpp-python or       -- real on-device LLM runtime bindings for Tier 1/2
+#     mlc-llm
