@@ -86,6 +86,23 @@ jobs:
         run: |
           echo "===== PWD ====="
           pwd
+          echo ""
+          echo "===== Current directory ====="
+          ls -la
+
+          echo ""
+          echo "===== Parent directory ====="
+          ls -la ..
+
+          echo ""
+          echo "===== Android directory ====="
+          ls -la android || true
+
+      - name: Gradle assembleDebug (build the committed android/ project)
+        working-directory: mobile/android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon --stacktrace
 
           echo ""
           echo "===== Current directory ====="
@@ -152,6 +169,8 @@ jobs:
         run: |
          chmod +x gradlew
          ./gradlew bundleRelease --no-daemon --stacktrace
+          chmod +x gradlew
+          ./gradlew bundleRelease --no-daemon --stacktrace
         env:
           TRUSTTRACE_UPLOAD_STORE_FILE: trusttrace-upload.keystore
           TRUSTTRACE_UPLOAD_STORE_PASSWORD: ${{ secrets.UPLOAD_STORE_PASSWORD }}
