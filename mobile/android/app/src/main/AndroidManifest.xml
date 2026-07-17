@@ -20,9 +20,10 @@
     </intent>
   </queries>
   <application android:name=".MainApplication" android:label="@string/app_name" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round" android:allowBackup="false" android:theme="@style/AppTheme">
-    <!-- OTA updates are disabled: the only update channel is a store release.
-         (The CHECK_ON_LAUNCH/LAUNCH_WAIT_MS keys were removed -- they are
-         ignored while ENABLED=false and only misread as half-enabled OTA.) -->
+  <!--
+  OTA updates are disabled.
+  The CHECK_ON_LAUNCH and LAUNCH_WAIT_MS keys were removed because
+  they are ignored while ENABLED=false and could be misleading.--> 
     <meta-data android:name="expo.modules.updates.ENABLED" android:value="false"/>
     <activity android:name=".MainActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|uiMode" android:launchMode="singleTask" android:windowSoftInputMode="adjustResize" android:theme="@style/Theme.App.SplashScreen" android:exported="true" android:screenOrientation="portrait">
       <intent-filter>
