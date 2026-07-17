@@ -18,7 +18,7 @@ node_modules/
 # React Native / Expo
 # -------------------------
 mobile/.expo/
-mobile/android/
+# mobile/android/
 mobile/ios/
 
 # -------------------------
@@ -71,3 +71,12 @@ local.properties
 # macOS
 # -------------------------
 Pods/
+
+# Android generated files
+mobile/android/.gradle/
+mobile/android/build/
+mobile/android/app/build/
+
+# React settings plugin generated files
+mobile/android/react-settings-plugin/.gradle/
+mobile/android/react-settings-plugin/build/

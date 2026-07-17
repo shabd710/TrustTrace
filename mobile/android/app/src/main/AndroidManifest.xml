@@ -1,0 +1,41 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+  <!--
+    Only permissions backed by a real implementation in THIS build are
+    declared. INTERNET backs the opt-in "Explain more" cloud call and the
+    backend fallback (mobile/src/api/client.ts). The GGUF model lives in the
+    app-private external/internal files dir (getExternalFilesDir/filesDir),
+    which needs NO storage permission on any supported API level, so
+    READ/WRITE_EXTERNAL_STORAGE were removed. BIND_ACCESSIBILITY_SERVICE,
+    RECEIVE_SMS, SYSTEM_ALERT_WINDOW and VIBRATE were removed because no
+    service/receiver/overlay/vibration is implemented or declared in this
+    build; re-add each ONLY alongside its implementation (Play Store rejects
+    unbacked sensitive permissions).
+  -->
+  <uses-permission android:name="android.permission.INTERNET"/>
+  <queries>
+    <intent>
+      <action android:name="android.intent.action.VIEW"/>
+      <category android:name="android.intent.category.BROWSABLE"/>
+      <data android:scheme="https"/>
+    </intent>
+  </queries>
+  <application android:name=".MainApplication" android:label="@string/app_name" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round" android:allowBackup="false" android:theme="@style/AppTheme">
+    <!-- OTA updates are disabled: the only update channel is a store release.
+         (The CHECK_ON_LAUNCH/LAUNCH_WAIT_MS keys were removed -- they are
+         ignored while ENABLED=false and only misread as half-enabled OTA.) -->
+    <meta-data android:name="expo.modules.updates.ENABLED" android:value="false"/>
+    <activity android:name=".MainActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|uiMode" android:launchMode="singleTask" android:windowSoftInputMode="adjustResize" android:theme="@style/Theme.App.SplashScreen" android:exported="true" android:screenOrientation="portrait">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+        <category android:name="android.intent.category.BROWSABLE"/>
+        <data android:scheme="com.trusttrace.app"/>
+      </intent-filter>
+    </activity>
+    <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" android:exported="false"/>
+  </application>
+</manifest>
